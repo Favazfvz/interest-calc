@@ -1,0 +1,73 @@
+import './App.css'
+import { TextField } from '@mui/material';
+import Stack from '@mui/material/Stack';
+import { Button } from '@mui/material';
+
+
+
+
+function App() {
+
+const validateInput=(tag)=>{
+  const {name,value}=tag
+console.log(name,value);
+if(!!value.match(/^[0-9]*.?[0-9]+$/)) {
+  if(name=='principle'){
+    setAmount(value)
+  }
+  else if(name=='rate'){
+    setRate(value)
+  }
+  else{
+    setYear(value)
+  }
+} 
+else{
+  if (name=='principle')
+    setIsInvalidPrinciple(true)
+}
+}
+
+  const handleCalculate = (e) => {
+    e.preventDefault()
+    console.log('button clicked');
+
+  }
+
+
+  return (
+    <>
+      <div style={{ height: "100%" }} className='d-flex align-items-center justify-content-center  w-100 bg-dark'>
+        <div style={{ height: "700px" }} className='w-50 bg-light text-center pt-4'>
+          <h1>Simple Interest Calculator</h1>
+
+          <h4>Calculate Your Simple Interest Easily</h4>
+          <div id="yDiv" style={{ height: "150px", width: '100%' }} className=' bg-warning mt-3 text-center d-block align-items-center justify-content-center '>
+            <h2 className="intrstHead pt-4"> ₹ 0</h2>
+            <h3 className="intrstHead">Total Simple Interest</h3>
+            <form className='mt-5'>
+              <TextField name='principle' onChange={(e)=>validateInput(e.target)} className='w-100 mb-3' id='principle_amount' label='amount' varient='outlined' />
+              {isInvalidPrinciple &&
+                <div className='text-danger fw-bold mb-2'>Invalid Principle Amount</div>
+              }
+              <TextField name='rate' onChange={(e)=>validateInput(e.target)} className='w-100 mb-3' id='principle_amount' label='amount' varient='outlined' />
+              <TextField name='period' onChange={(e)=>validateInput(e.target)} className='w-100 mb-3' id='principle_amount' label='amount' varient='outlined' />
+
+              <Stack direction='row' spacing={2}>
+
+                <button onClick={(e) => handleCalculate(e)} type='submit' className='w-100 bg-dark p-3' varient='contained'>Calculate</button>
+                <button className='w-100 p-3 text-black border dark bg-light' varient='outlined'>Reset</button>
+              </Stack>
+
+            </form>
+
+          </div><br></br>
+
+        </div>
+      </div>
+
+    </>
+  )
+}
+
+export default App
